@@ -60,13 +60,13 @@ public class ErrorCodeGenerator extends AbstractMojo {
   @Parameter(defaultValue = "${project}", required = true)
   protected MavenProject project;
 
-  @Parameter(property = "errorCode.errorFileName", required = true, defaultValue = "${project.artifactId}")
+  @Parameter(property = "cloudImpl.errorCode.errorFileName", required = true, defaultValue = "${project.artifactId}")
   protected String errorFileName;
 
-  @Parameter(property = "errorCode.package", required = true, defaultValue = "com.ustack.error")
+  @Parameter(property = "cloudImpl.errorCode.package", required = true, defaultValue = "com.cloudimpl.error")
   protected String errorPackage;
 
-  @Parameter(property = "errorCode.enable", required = true, defaultValue = "false")
+  @Parameter(property = "cloudImpl.errorCode.enable", required = true, defaultValue = "false")
   protected boolean enableErrorCode;
 
   @Parameter(defaultValue = "${project.build.directory}/generated-sources/errorcodes", required = true)

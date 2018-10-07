@@ -10,9 +10,9 @@
     <packaging>jar</packaging>
     
     <properties>
-        <errorCode.enable>true</errorCode.enable>
-        <errorCode.package>com.cloudimpl.sample.error</errorCode.package>
-        <errorCode.errorFileName>Sample</errorCode.errorFileName>
+        <cloudImpl.errorCode.enable>true</cloudImpl.errorCode.enable>
+        <cloudImpl.errorCode.package>com.cloudimpl.sample.error</cloudImpl.errorCode.package>
+        <cloudImpl.errorCode.errorFileName>Sample</cloudImpl.errorCode.errorFileName>
     </properties>   
     <build>
         <plugins>
