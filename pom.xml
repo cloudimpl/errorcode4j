@@ -8,6 +8,7 @@
     <modules>
         <module>error-lib</module>
         <module>errorcode-generator</module>
+        <module>example</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
