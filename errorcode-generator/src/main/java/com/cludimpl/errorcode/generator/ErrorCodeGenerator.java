@@ -4,9 +4,13 @@
  */
 package com.cludimpl.errorcode.generator;
 
-import com.squareup.javapoet.AnnotationSpec;
+
+import com.cloudimpl.codegen4j.AccessLevel;
+import com.cloudimpl.codegen4j.ClassBuilder;
+import com.cloudimpl.codegen4j.ConstructorBlock;
+import com.cloudimpl.codegen4j.EnumBlock;
+import com.cloudimpl.codegen4j.Var;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
@@ -295,50 +299,22 @@ public class ErrorCodeGenerator extends AbstractMojo {
     if (errorFile.exists()) {
       return;
     }
-    FieldSpec errorNo = FieldSpec.builder(int.class, "errorNo")
-        .addModifiers(Modifier.PRIVATE, Modifier.FINAL)
-        .build();
-    FieldSpec errorFormat = FieldSpec.builder(String.class, "errorFormat")
-        .addModifiers(Modifier.PRIVATE, Modifier.FINAL)
-        .build();
-
-    MethodSpec errorNum = MethodSpec.methodBuilder("getErrorNo")
-        .returns(int.class)
-        .addModifiers(Modifier.PUBLIC)
-        .addAnnotation(AnnotationSpec.builder(Override.class).build())
-        .addStatement("return errorNo", int.class)
-        .build();
-    MethodSpec format = MethodSpec.methodBuilder("getFormat")
-        .returns(String.class)
-        .addModifiers(Modifier.PUBLIC)
-        .addAnnotation(AnnotationSpec.builder(Override.class).build())
-        .addStatement("return errorFormat", String.class)
-        .build();
-
-    TypeSpec error = TypeSpec.enumBuilder(errorFileName)
-        .addModifiers(Modifier.PUBLIC)
-        .addSuperinterface(ClassName.get("com.cloudimpl.error.core", "ErrorCode"))
-        .addField(errorNo)
-        .addField(errorFormat)
-        .addMethod(errorNum)
-        .addMethod(format)
-        .addMethod(MethodSpec.constructorBuilder()
-            .addParameter(int.class, "errorNo")
-            .addParameter(String.class, "errorFormat")
-            .addStatement("this.$N = $N", "errorNo", "errorNo")
-            .addStatement("this.$N = $N", "errorFormat", "errorFormat")
-            .build())
-        .addEnumConstant("_", TypeSpec.anonymousClassBuilder("$L,$S", 0, "")
-            .build())
-        .build();
-
-    JavaFile javaFile = JavaFile.builder(errorPackage, error).skipJavaLangImports(true)
-        .build();
-    try {
-      javaFile.writeTo(projectSourceDirectory);
-    } catch (IOException ex) {
-      Logger.getLogger(ErrorCodeGenerator.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    
+      ClassBuilder builder = new ClassBuilder();
+      EnumBlock enumBlock = builder.createEnum(errorFileName);
+      enumBlock.withPackageName(errorPackage)
+              .withAccess(AccessLevel.PUBLIC);
+      enumBlock.implement("com.cloudimpl.error.core.ErrorCode");
+      Var erroNo = enumBlock.var("int", "errorNo").withAccess(AccessLevel.PRIVATE).withFinal().end();
+      Var errFormat = enumBlock.var("String", "format").withAccess(AccessLevel.PRIVATE).withFinal().end();
+      ConstructorBlock cb = enumBlock.createConstructor("int errorNo","String errorFormat");
+      cb.stmt().append("this.errorNo").append("=").append2("errorNo").end();
+      cb.stmt().append("this.format").append("=").append2("errorFormat").end();
+      enumBlock.createGetter(erroNo).withAnnotation(Override.class.getSimpleName());
+      enumBlock.createGetter(errFormat).withAnnotation(Override.class.getSimpleName());
+      
+      com.cloudimpl.codegen4j.JavaFile jFile = com.cloudimpl.codegen4j.JavaFile.wrap(enumBlock);
+      jFile.writeTo(projectSourceDirectory);
   }
 
 }
