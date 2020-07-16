@@ -52,7 +52,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
       with:
-          tag_name: ${{ env.CODEGEN_VERSION }}
+          tag_name: ${{ env.ERRCODE_VERSION }}
           release_name: ${{ env.ERRCODE_VERSION }} - ${{ github.event.head_commit.message }}
           body: |
             Automated release
