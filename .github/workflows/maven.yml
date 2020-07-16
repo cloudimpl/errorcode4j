@@ -23,7 +23,10 @@ jobs:
       with:
         java-version: '11'
         
-        
+    - name: replace group id
+      if: success()
+      run: find . -name "pom.xml" | xargs sed -i "s/<groupId>com.cloudimpl<\/groupId>/<groupId>com.github.cloudimpl<\/groupId>/g" 
+     
     - name: Extract ERRCODE_VERSION
       if: success()
       run: |
