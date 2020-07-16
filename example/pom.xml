@@ -14,12 +14,25 @@
         <cloudImpl.errorCode.package>com.cloudimpl.sample.error</cloudImpl.errorCode.package>
         <cloudImpl.errorCode.errorFileName>Sample</cloudImpl.errorCode.errorFileName>
     </properties>   
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
         <plugins>
+           
             <plugin>
-                <groupId>com.cloudimpl</groupId>
+                <groupId>com.github.cloudimpl.errorcode4j</groupId>
                 <artifactId>errorcode-generator</artifactId>
-                <version>${project.version}</version>
+                <version>2.0.0.8</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -31,8 +44,8 @@
                         </configuration>
                     </execution>
                 </executions>
-
             </plugin>
+
         </plugins>
     </build>
     <dependencies>
