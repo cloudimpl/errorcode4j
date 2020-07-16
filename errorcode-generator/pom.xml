@@ -38,10 +38,10 @@
             <version>1.11.1</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>codegen-lib</artifactId>
-            <version>2.0.0</version>
-        </dependency>
+	    <groupId>com.github.cloudimpl</groupId>
+	    <artifactId>codegen4j</artifactId>
+	    <version>2.0.0.10</version>
+	</dependency>
     </dependencies>
     <build>
         <plugins>
