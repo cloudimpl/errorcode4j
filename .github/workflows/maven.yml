@@ -38,12 +38,12 @@ jobs:
       run: |
         mvn -B package --file pom.xml
         mvn clean install
-    - name: Publish to GitHub Packages Apache Maven
-      env:
-        GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-      run: |
-        echo "<settings><servers><server><id>github</id><username>nuwansa</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
-        mvn deploy
+#     - name: Publish to GitHub Packages Apache Maven
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+#       run: |
+#         echo "<settings><servers><server><id>github</id><username>nuwansa</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+#         mvn deploy
         
     - name: Create Release
       if: success() && github.event_name == 'push'
