@@ -1,17 +1,60 @@
-name: Java CI
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-on: [push]
+name: Java CI with Maven
 
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
 jobs:
   build:
-
+    env: 
+      key1: ${{secrets.WORKFLOW_TOKEN}} 
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+    - run: echo $key1
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.11
+      uses: joschi/setup-jdk@v1
       with:
-        java-version: 1.8
+        java-version: '11'
+        
+        
+    - name: Extract ERRCODE_VERSION
+      if: success()
+      run: |
+        export VERSION=`cat pom.xml | grep "<version>" | head -n 1 |  awk -F'>' '{print $2}' | awk -F'<' '{print $1}'` && echo "::set-env name=ERRCODE_VERSION::${VERSION}.${GITHUB_RUN_NUMBER}"
+        echo $ERRCODE_VERSION
+        
+    - name: Set errcode build number
+      if: success()
+      run: mvn versions:set versions:commit -DnewVersion="${ERRCODE_VERSION}"
+          
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: |
+        mvn -B package --file pom.xml
+        mvn clean install
+    - name: Publish to GitHub Packages Apache Maven
+      env:
+        GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+      run: |
+        echo "<settings><servers><server><id>github</id><username>nuwansa</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+        mvn deploy
+        
+    - name: Create Release
+      if: success() && github.event_name == 'push'
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+      with:
+          tag_name: ${{ env.CODEGEN_VERSION }}
+          release_name: ${{ env.ERRCODE_VERSION }} - ${{ github.event.head_commit.message }}
+          body: |
+            Automated release
+          draft: false
+          prerelease: false
