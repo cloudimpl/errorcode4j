@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.github.cloudimpl</groupId>
+        <groupId>com.cloudimpl</groupId>
         <artifactId>errorcode4j</artifactId>
         <version>2.0.0</version>
     </parent>
@@ -20,19 +20,13 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </pluginRepository>
-    </pluginRepositories>
     <build>
         <plugins>
            
             <plugin>
-                <groupId>com.cloudimpl.errorcode4j</groupId>
+                <groupId>com.cloudimpl</groupId>
                 <artifactId>errorcode-generator</artifactId>
-                <version>2.0.0</version>
+                <version>2.0.0.20</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -52,7 +46,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>error-lib</artifactId>
-            <version>${project.version}</version>
+            <version>2.0.0.20</version>
         </dependency>
     </dependencies>
 </project>
