@@ -32,13 +32,6 @@
         <developerConnection>scm:git:ssh://github.com:cloudimpl/errorcode4j.git</developerConnection>
         <url>http://github.com/cloudimpl/errorcode4j/tree/master</url>
     </scm>
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>

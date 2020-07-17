@@ -14,12 +14,6 @@
         <cloudImpl.errorCode.package>com.cloudimpl.sample.error</cloudImpl.errorCode.package>
         <cloudImpl.errorCode.errorFileName>Sample</cloudImpl.errorCode.errorFileName>
     </properties>   
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
     <build>
         <plugins>
            

@@ -38,9 +38,9 @@
             <version>1.11.1</version>
         </dependency>
         <dependency>
-	    <groupId>com.github.cloudimpl</groupId>
-	    <artifactId>codegen4j</artifactId>
-	    <version>2.0.0.10</version>
+	    <groupId>com.cloudimpl</groupId>
+	    <artifactId>codegen-lib</artifactId>
+	    <version>2.0.0.12</version>
 	</dependency>
     </dependencies>
     <build>
