@@ -9,7 +9,7 @@
     <artifactId>errorcode-generator</artifactId>
     <packaging>maven-plugin</packaging>
     <properties>
-        <mavenVersion>3.5.4</mavenVersion>
+        <mavenVersion>3.8.1</mavenVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
